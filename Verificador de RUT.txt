@@ -1,0 +1,33 @@
+set serveroutput on
+accept rut_in char prompt 'Escribe tu rut'
+
+declare 
+rut varchar2(11) := '&rut_in';
+num_serie number := 2;
+cum number:= 0;
+begin
+
+for num_vuelta in reverse 1..length(rut)
+loop
+dbms_output.put_line(substr(rut,num_vuelta,1) || '*' || num_serie);
+cum := cum + (substr(rut,num_vuelta,1) * num_serie);
+num_serie:= num_serie +1;
+
+if(num_serie >7) 
+
+    then num_serie :=2;
+    
+end if;
+
+
+
+end loop;
+dbms_output.put_line('La suma total es: ' || cum);
+dbms_output.put_line('El resto o diferencia por 11: ' || mod(cum,11));
+if ((11- mod(cum,11))=10) then dbms_output.put_line('El digito verificador es K');
+else 
+dbms_output.put_line('El digito verificador es: ' || (11- mod(cum,11)));
+end if;
+
+
+end;
