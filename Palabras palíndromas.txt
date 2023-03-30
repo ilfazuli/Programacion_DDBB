@@ -1,0 +1,24 @@
+set serveroutput on
+
+accept palabra_in char prompt 'Escriba una palabra para saber si es palíndroma'
+
+declare
+palabra varchar(20):= '&palabra_in';
+palabra_inv varchar(20);
+
+begin
+
+for contador in reverse 1.. length(palabra) 
+loop
+    palabra_inv := palabra_inv || substr(palabra, contador, 1);
+end loop;
+
+if (palabra = palabra_inv) then
+    dbms_output.put_line('Su palabra es palíndroma');
+    dbms_output.put_line('Su palabra: ' || palabra);
+    dbms_output.put_line('Su palabra invertida: ' || palabra_inv);
+else
+dbms_output.put_line('Su palabra no es palíndroma nuuv');
+
+end if;
+end;
